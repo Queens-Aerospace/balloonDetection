@@ -1,0 +1,6 @@
+train: /app/data/train/images
+val: /app/data/valid/images
+test: /app/data/test/images
+
+nc: 1
+names: ['red']

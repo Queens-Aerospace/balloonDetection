@@ -1,0 +1,17 @@
+services:
+  yolov5:
+    image: ultralytics/ultralytics
+    container_name: yolov8
+    volumes:
+      - ./:/app
+    cpus: 12
+    shm_size: '64g'
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           capabilities: [gpu]
+    restart: unless-stopped
+    working_dir: /app
+    entrypoint: ["tail", "-f", "/dev/null"]
