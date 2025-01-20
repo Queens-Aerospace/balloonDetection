@@ -1,2 +1,5 @@
 ultralytics
 torch
+opencv-python
+rospy
+cv_bridge

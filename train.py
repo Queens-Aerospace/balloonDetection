@@ -27,7 +27,7 @@ device_param = 0 if device.type == 'cuda' else 'cpu'
 # Train the model
 results = model.train(
     data='/app/data/dataset.yaml',
-    epochs=1,
+    epochs=600,
     imgsz=640,
     device=device_param,
     batch=16,  # Adjusted batch size

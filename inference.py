@@ -4,7 +4,7 @@ import os
 import cv2
 
 # Load the model from the specified path
-model_path = '/app/ /app/training_projects/runs/v002/weights/best.pt'
+model_path = '/app/training_projects/runs/v00/weights/best.pt'
 model = YOLO(model_path)  # Initialize the model with pre-trained weights
 
 # Input Image path

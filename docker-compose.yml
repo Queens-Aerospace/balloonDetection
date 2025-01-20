@@ -1,17 +1,22 @@
 services:
-  yolov5:
+  yolov8:
     image: ultralytics/ultralytics
     container_name: yolov8
     volumes:
       - ./:/app
     cpus: 12
     shm_size: '64g'
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - driver: nvidia
-    #           capabilities: [gpu]
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
     restart: unless-stopped
     working_dir: /app
+    devices:
+      - "/dev/video0:/dev/video0"
+      - "/dev/video1:/dev/video1"
     entrypoint: ["tail", "-f", "/dev/null"]
+    privileged: true

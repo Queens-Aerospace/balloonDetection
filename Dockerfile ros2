@@ -1,0 +1,26 @@
+FROM ros:noetic-ros-base
+
+# Install essential tools and Python dependencies
+RUN apt-get update && apt-get install -y \
+    python3-pip \
+    python3-rosdep \
+    python3-rosinstall \
+    python3-catkin-tools \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install cv_bridge dependencies
+RUN apt-get update && apt-get install -y \
+    ros-noetic-cv-bridge \
+    ros-noetic-image-transport \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install additional Python packages
+RUN pip3 install ultralytics opencv-python
+
+# Source ROS setup
+RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+
+
+# Set the working directory to /app
+WORKDIR /app
