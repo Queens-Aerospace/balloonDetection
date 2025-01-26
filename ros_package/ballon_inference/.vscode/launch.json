@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Ballon_Inference",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/ballon_inference/ballon_inference.py",
+        "console": "integratedTerminal",
+        "args": [
+          "--preview"
+        ]
+      }
+    ]
+  }
+  
