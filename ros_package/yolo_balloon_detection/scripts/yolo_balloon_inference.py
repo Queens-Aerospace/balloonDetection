@@ -5,7 +5,7 @@ import cv2
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
-from yolo_detections_msg.msg import BoundingBoxes, BoundingBox
+from yolo_balloon_detection.msg import BoundingBoxes, BoundingBox
 from ultralytics import YOLO
 from cv_bridge import CvBridge
 import logging
@@ -19,10 +19,10 @@ CONFIDENCE_THRESHOLD = 0.3  # Minimum confidence for detections
 bridge = CvBridge()
 
 CLASS_NAMES = {
-        0: "person",
-        1: "bicycle",
-        2: "car",
-        3: "tv",
+        0: "red_ballon",
+        1: "other",
+        2: "other",
+        3: "other",
     }
 
 
@@ -30,13 +30,15 @@ def parse_args():
     """Parse command-line arguments."""
     parser = argparse.ArgumentParser(description="YOLO Inference with ROS integration")
     parser.add_argument("--preview", "-p", action="store_true", help="Enable video preview with detections")
+    parser.add_argument("--gui", "-g", action="store_true", help="Enable video gui preview with detections")
     return parser.parse_args()
 
 
 class YOLOInferenceNode(Node):
-    def __init__(self, preview):
+    def __init__(self, enable_preview, enable_gui):
         super().__init__('yolo_inference_node')
-        self.preview = preview
+        self.enable_preview = enable_preview
+        self.enable_gui = enable_gui
 
         # Publishers
         self.image_pub = self.create_publisher(Image, '/inferenced_image', 10)
@@ -76,14 +78,14 @@ class YOLOInferenceNode(Node):
         self.publish_bounding_boxes(detections)
 
         # Publish or preview image with detections
-        if self.preview:
+        if self.enable_preview:
             annotated_frame = results[0].plot()  # Annotate frame with bounding boxes
             image_msg = bridge.cv2_to_imgmsg(annotated_frame, encoding="bgr8")
             self.image_pub.publish(image_msg)
             self.get_logger().info("Published annotated image.")
 
-            # Display the frame for preview
-            cv2.imshow("YOLO Inference Preview", annotated_frame)
+        if self.enable_gui:
+            cv2.imshow("YOLO Inference GUI", frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 self.get_logger().info("Preview stopped by user.")
                 rclpy.shutdown()
@@ -146,10 +148,12 @@ def main(args=None):
 
     # Create the YOLO Inference Node
     try:
-        yolo_node = YOLOInferenceNode(preview=cli_args.preview)
+        yolo_node = YOLOInferenceNode(enable_preview=cli_args.preview, enable_gui=cli_args.gui)
         rclpy.spin(yolo_node)
     except RuntimeError as e:
         print(f"Node failed to initialize: {e}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
     finally:
         yolo_node.destroy_node()
         rclpy.shutdown()

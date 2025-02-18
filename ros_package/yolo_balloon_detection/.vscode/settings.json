@@ -1,0 +1,18 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/hayden/QADT2025/ros2_ws/install/ballon_inference/lib/python3.10/site-packages",
+        "/home/hayden/QADT2025/ros2_ws/install/yolo_detections_msg/local/lib/python3.10/dist-packages",
+        "/home/hayden/QADT2025/ros2_ws/install/qad_lidar_transformer/lib/python3.10/site-packages",
+        "/home/hayden/QADT2025/ros2_ws/install/cepton_messages/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/hayden/QADT2025/ros2_ws/install/ballon_inference/lib/python3.10/site-packages",
+        "/home/hayden/QADT2025/ros2_ws/install/yolo_detections_msg/local/lib/python3.10/dist-packages",
+        "/home/hayden/QADT2025/ros2_ws/install/qad_lidar_transformer/lib/python3.10/site-packages",
+        "/home/hayden/QADT2025/ros2_ws/install/cepton_messages/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}

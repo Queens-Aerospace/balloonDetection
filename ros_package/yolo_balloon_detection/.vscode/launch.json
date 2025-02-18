@@ -2,10 +2,10 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": "Ballon_Inference",
+        "name": "yolo_balloon_inference",
         "type": "debugpy",
         "request": "launch",
-        "program": "${workspaceFolder}/ballon_inference/ballon_inference.py",
+        "program": "${workspaceFolder}/scripts/yolo_balloon_inference.py",
         "console": "integratedTerminal",
         "args": [
           "--preview"
